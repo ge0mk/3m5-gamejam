@@ -6,7 +6,7 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerControl : MonoBehaviour
 {
-    public Camera cam;
+    public InputSystem input;
     public float Speed;
     
     public Vector3 forceDirection;
@@ -15,11 +15,10 @@ public class PlayerControl : MonoBehaviour
     private float angel;
     
     private Rigidbody rb;
-    private InputSystem input;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        input = cam.GetComponent<InputSystem>();
+        input = GetComponent<InputSystem>();
     }
 
     // Update is called once per frame
