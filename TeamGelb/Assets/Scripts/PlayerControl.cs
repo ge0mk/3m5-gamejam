@@ -6,54 +6,42 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerControl : MonoBehaviour
 {
+    public Camera cam;
     public float Speed;
     
     public Vector3 forceDirection;
     public float StepAngel;
-    public KeyCode left, Right, Up, Down;
 
-    public float angel;
-    public float StepTime;
+    private float angel;
     
     private Rigidbody rb;
-    private float timeLeft;
-    private bool hasClicked;
+    private InputSystem input;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        input = cam.GetComponent<InputSystem>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         rb.AddForce(forceDirection * Speed, ForceMode.Force);
         transform.rotation = Quaternion.LookRotation(forceDirection);
         //transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.02f);
     }
     private void Update()
     {
-        timeLeft += Time.deltaTime;
-        if (timeLeft > StepTime)
+        switch (input.GetHorizontalDelta())
         {
-            if (hasClicked)
-            {
-                timeLeft = 0f;
-                hasClicked = false;
-                return;
-            }
-            if (Input.GetKey(left))
-            {
-                angel -= StepAngel;
-                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angel), 0f, Mathf.Cos(Mathf.Deg2Rad * angel));
-                hasClicked = true;
-            }
-            if (Input.GetKey(Right))
-            { 
+            case 1f:
                 angel += StepAngel;
                 forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angel), 0f, Mathf.Cos(Mathf.Deg2Rad * angel));
-                hasClicked = true;
-            }
+                break;
+            case -1f:
+                angel -= StepAngel;
+                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angel), 0f, Mathf.Cos(Mathf.Deg2Rad * angel));
+                break;
+        
         }
  
     }

@@ -89,14 +89,18 @@ public class InputSystem : MonoBehaviour
         d = false;
     }
 
-    float GetForwardDelta()
+    public float GetForwardDelta()
     {
-        return forward_delta;
+        var result = forward_delta;
+        forward_delta = 0;
+        return result;
     }
 
-    float GetHorizontalDelta()
+    public float GetHorizontalDelta()
     {
-        return horizontal_delta;
+        var result = horizontal_delta;
+        horizontal_delta = 0;
+        return result;
     }
 
     void OnGUI() {
