@@ -9,16 +9,18 @@ public class PlayerControl : MonoBehaviour
     public InputSystem input;
     public float Speed;
     
-    public Vector3 forceDirection;
     public float StepAngel;
     public float StepSpeed;
-    private float angel;
     
+    private Vector3 forceDirection;
+    float Angel;
     private Rigidbody rb;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         input = GetComponent<InputSystem>();
+        Angel = transform.eulerAngles.y;
+        forceDirection = transform.forward;
     }
 
     // Update is called once per frame
@@ -30,8 +32,27 @@ public class PlayerControl : MonoBehaviour
     }
     private void Update()
     {
-        angel += StepAngel * input.GetHorizontalDelta();
-        forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angel), 0f, Mathf.Cos(Mathf.Deg2Rad * angel));
-        Speed += StepSpeed * input.GetForwardDelta();
+        switch (input.GetHorizontalDelta())
+        {
+            case 1f:
+                Angel += StepAngel;
+                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * Angel), 0f, Mathf.Cos(Mathf.Deg2Rad * Angel));
+                break;
+            case -1f:
+                Angel -= StepAngel;
+                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * Angel), 0f, Mathf.Cos(Mathf.Deg2Rad * Angel));
+                break;
+        
+        }
+        switch (input.GetForwardDelta())
+        {
+            case 1f:
+                Speed += StepSpeed;
+                break;
+            case -1f:
+                Speed -= StepSpeed;
+                break;
+        
+        }
     }
 }
