@@ -30,28 +30,8 @@ public class PlayerControl : MonoBehaviour
     }
     private void Update()
     {
-        switch (input.GetHorizontalDelta())
-        {
-            case 1f:
-                angel += StepAngel;
-                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angel), 0f, Mathf.Cos(Mathf.Deg2Rad * angel));
-                break;
-            case -1f:
-                angel -= StepAngel;
-                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angel), 0f, Mathf.Cos(Mathf.Deg2Rad * angel));
-                break;
-        
-        }
-        switch (input.GetForwardDelta())
-        {
-            case 1f:
-                Speed += StepSpeed;
-                break;
-            case -1f:
-                angel -= StepSpeed;
-                break;
-        
-        }
- 
+        angel += StepAngel * input.GetHorizontalDelta();
+        forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angel), 0f, Mathf.Cos(Mathf.Deg2Rad * angel));
+        Speed += StepSpeed * input.GetForwardDelta();
     }
 }
