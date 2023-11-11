@@ -39,9 +39,14 @@ public class InputSystem : MonoBehaviour
         }
     }
 
-    float GetSecondsPerBeat()
+    public float GetSecondsPerBeat()
     {
         return 1.0f / (bpm / 60.0f);
+    }
+
+    public float GetProgress()
+    {
+        return timer / GetSecondsPerBeat();
     }
 
     bool InsideInputWindow()
@@ -101,12 +106,5 @@ public class InputSystem : MonoBehaviour
         var result = horizontal_delta;
         horizontal_delta = 0;
         return result;
-    }
-
-    void OnGUI() {
-        GUI.color = Color.black;
-        GUI.Box(new Rect(0, 0, Screen.width * timer / GetSecondsPerBeat(), 50), "");
-        GUI.Box(new Rect(Screen.width - Screen.width * window_size / GetSecondsPerBeat(), 0, Screen.width * window_size / GetSecondsPerBeat(), 50), "");
-        GUI.Label(new Rect(0, 50, 200, 100), "" + forward_delta + " | " + horizontal_delta);
     }
 }
