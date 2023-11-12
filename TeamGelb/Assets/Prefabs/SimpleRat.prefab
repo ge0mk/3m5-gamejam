@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1212154555025692456}
   - component: {fileID: 3447121913162073340}
   - component: {fileID: 5237007892344003588}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: SimpleRat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
