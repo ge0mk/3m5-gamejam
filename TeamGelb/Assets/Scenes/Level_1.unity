@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04365543, g: 0.044817843, b: 0.059549738, a: 1}
+  m_IndirectSpecularColor: {r: 0.043663032, g: 0.04482539, b: 0.059559315, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10112,17 +10112,17 @@ PrefabInstance:
     - target: {fileID: 4702883148874839594, guid: 5a515c222b8d446e49f341d59603afb8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -183.57956
+      value: -456.9043
       objectReference: {fileID: 0}
     - target: {fileID: 4702883148874839594, guid: 5a515c222b8d446e49f341d59603afb8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 175.17049
+      value: 304.89728
       objectReference: {fileID: 0}
     - target: {fileID: 4702883148874839594, guid: 5a515c222b8d446e49f341d59603afb8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 71.72822
+      value: 186.61519
       objectReference: {fileID: 0}
     - target: {fileID: 4702883148874839594, guid: 5a515c222b8d446e49f341d59603afb8,
         type: 3}
@@ -12598,6 +12598,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2954501845779452557, guid: 21ade56dd89564153b7344e374e378ed,
+        type: 3}
+      propertyPath: ScreenPositionOffset
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2961777197243422130, guid: 21ade56dd89564153b7344e374e378ed,
         type: 3}
       propertyPath: m_Name
@@ -14118,6 +14123,7 @@ GameObject:
   - component: {fileID: 7477221196775167703}
   - component: {fileID: 4356815308401701757}
   - component: {fileID: 8968828160456590182}
+  - component: {fileID: 8968828160456590183}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -14444,6 +14450,11 @@ PrefabInstance:
       propertyPath: Player2
       value: 
       objectReference: {fileID: 1557359544}
+    - target: {fileID: 3504707706620002834, guid: 1156e2942b83447619f242c308461d41,
+        type: 3}
+      propertyPath: mainAudioController
+      value: 
+      objectReference: {fileID: 4356815308401701757}
     - target: {fileID: 5358410821167047509, guid: 1156e2942b83447619f242c308461d41,
         type: 3}
       propertyPath: m_Name
@@ -14497,8 +14508,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: ac70f33cdd7fdb8d480f9ce35d6772dd,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: db66bc3bfa9b8f9f7985998ff186686d, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: c4dcc4137387804ada30bff6346845d7, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -14583,6 +14594,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &8968828160456590183
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3178311163098104114}
+  m_Enabled: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
