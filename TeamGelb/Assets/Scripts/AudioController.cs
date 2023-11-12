@@ -21,6 +21,16 @@ public class AudioController : MonoBehaviour
         pitchBendGroup.audioMixer.SetFloat("pitchBend", 1f / audioSource.pitch);
     }
 
+    public void StartAudio()
+    {
+        audioSource.Play();
+    }
+
+    public void StopAudio()
+    {
+        audioSource.Stop();
+    }
+
     public float CurrentTime()
     {
         return audioSource.time;
