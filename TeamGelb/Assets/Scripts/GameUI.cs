@@ -46,7 +46,7 @@ public class GameUI : MonoBehaviour
         InitStyles();
 
         float window_width = Screen.width * input_system.GetWindowSize() / input_system.GetSecondsPerBeat() * ScreenWidth;
-        float window_left_edge = (Screen.width / 2 - window_width) * (1.0f + ScreenPositionOffset * 5.0f) / 2.0f;
+        float window_left_edge = (Screen.width / 2 - window_width) / 2 + Screen.width * ScreenPositionOffset;
         GUI.Box(new Rect(window_left_edge, 0, window_width, 50), "");
 
         float progress = (input_system.GetProgress() + 0.5f + input_system.GetWindowSize() / 2.0f + cursor_offset) % 1.0f;
