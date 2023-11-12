@@ -11,13 +11,12 @@ public class Checkpoint : MonoBehaviour
         // only do something when player collides
         if (collider.TryGetComponent<PlayerControl>(out PlayerControl player))
         {
-            InformCheckpointManager();
+            InformCheckpointManager(player);
         }
     }
 
-    public void InformCheckpointManager()
+    public void InformCheckpointManager(PlayerControl player)
     {
-        checkpointManager.PlayerThroughCheckpoint(this);
-        GetComponent<Collider>().enabled = false; // do not trigger again
+        checkpointManager.PlayerThroughCheckpoint(this, player);
     }
 }
