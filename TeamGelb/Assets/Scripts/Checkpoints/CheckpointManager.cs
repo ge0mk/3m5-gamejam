@@ -28,6 +28,9 @@ public class CheckpointManager : MonoBehaviour
     public void ResetPlayerToLastCheckpoint(PlayerControl player)
     {
         Transform lastCheckpointPosition = visitedCheckpoints.Last().GetComponent<Transform>();
-        player.GetComponent<Transform>().position = lastCheckpointPosition.transform.position;
+        var rb = player.GetComponent<Rigidbody>();
+        rb.velocity = lastCheckpointPosition.transform.forward * player.Speed;
+        rb.position= lastCheckpointPosition.transform.position;
+        rb.rotation = lastCheckpointPosition.transform.rotation;
     }
 }
