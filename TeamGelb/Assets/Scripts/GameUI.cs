@@ -39,7 +39,7 @@ public class GameUI : MonoBehaviour
         float window_left_edge = Screen.width / 2.0f - window_width / 2.0f;
         GUI.Box(new Rect(window_left_edge, 0, window_width, 50), "");
 
-        float progress = (input_system.GetProgress() + 0.5f + input_system.window_size / 2.0f) % 1.0f;
+        float progress = (input_system.GetProgress() + 0.4f + input_system.window_size / 2.0f) % 1.0f;
         GUI.Box(new Rect(Screen.width * progress - 5, 0, 5, 50), "", currentStyle);
 
         GUI.Button(new Rect(10, 10, 70, 30), "Menu");
@@ -80,6 +80,4 @@ public class GameUI : MonoBehaviour
     {
         current_color = no_input_color;
     }
-
-
 }
