@@ -7,6 +7,8 @@ public class InputSystem : MonoBehaviour
     public float bpm = 40.0f;
     public float window_size = 0.5f;
 
+    public bool isValid { get; set; }
+
     private AudioSource audio_source;
 
     private float forward_delta = 0.0f;
@@ -22,20 +24,27 @@ public class InputSystem : MonoBehaviour
     private float prev_time = 0.0f;
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         audio_source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!InsideInputWindow()) {
+        bool isValid = InsideInputWindow();
+        if (!isValid)
+        {
             UpdateIgnoredInputs();
-        } else {
+        }
+        else
+        {
             UpdateInputs();
         }
+        GiveInputFeedback(isValid);
 
-        if (TimeSinceLastUpdate() > GetSecondsPerBeat()) {
+        if (TimeSinceLastUpdate() > GetSecondsPerBeat())
+        {
             prev_time += GetSecondsPerBeat();
             UpdateDeltas();
             ClearInputs();
@@ -114,5 +123,10 @@ public class InputSystem : MonoBehaviour
         var result = horizontal_delta;
         horizontal_delta = 0;
         return result;
+    }
+
+    private void GiveInputFeedback(bool isValid)
+    {
+        this.isValid = isValid;
     }
 }
