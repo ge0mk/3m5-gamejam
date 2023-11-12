@@ -22,6 +22,7 @@ public class InputSystem : MonoBehaviour
     private bool w, a, s, d;
 
     private float prev_time = 0.0f;
+    private float current_time = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,12 @@ public class InputSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        current_time = audio_source.time;
+        if (current_time < prev_time)
+        { // song restarted
+            prev_time = 0f;
+        }
+
         bool isValid = InsideInputWindow();
         if (!isValid)
         {
@@ -58,7 +65,7 @@ public class InputSystem : MonoBehaviour
 
     public float TimeSinceLastUpdate()
     {
-        return audio_source.time - prev_time;
+        return current_time - prev_time;
     }
 
     public float GetProgress()
