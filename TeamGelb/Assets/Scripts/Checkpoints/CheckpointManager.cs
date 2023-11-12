@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
-    public PlayerControl player;
+    public List<PlayerControl> players;
     private List<Checkpoint> visitedCheckpoints;
     void Awake()
     {
@@ -14,10 +14,15 @@ public class CheckpointManager : MonoBehaviour
         gameObject.transform.GetChild(0).GetComponent<Checkpoint>().InformCheckpointManager();
     }
 
-    private void Update() {
-        if (player.transform.position.y < -4) {
-            ResetPlayerToLastCheckpoint(player);
-        }
+    private void Update()
+    {
+        players.ForEach(player =>
+        {
+            if (player.transform.position.y < -4)
+            {
+                ResetPlayerToLastCheckpoint(player);
+            }
+        });
     }
 
     public void PlayerThroughCheckpoint(Checkpoint checkpoint)
@@ -29,9 +34,9 @@ public class CheckpointManager : MonoBehaviour
     {
         Transform lastCheckpointPosition = visitedCheckpoints.Last().GetComponent<Transform>();
         var rb = player.GetComponent<Rigidbody>();
-        this.player.ResetAngle(lastCheckpointPosition.transform.eulerAngles.y);
+        player.ResetAngle(lastCheckpointPosition.transform.eulerAngles.y);
         rb.velocity = lastCheckpointPosition.transform.forward * player.GetSpeed();
-        rb.position= lastCheckpointPosition.transform.position;
+        rb.position = lastCheckpointPosition.transform.position;
         rb.rotation = lastCheckpointPosition.transform.rotation;
     }
 }
