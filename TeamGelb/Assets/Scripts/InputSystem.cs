@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class InputSystem : MonoBehaviour
 {
-    public float bpm = 40.0f;
-    public float window_size = 0.5f;
-    public float beat_offset = 0.0f;
-
     public bool isValid { get; set; }
 
-    private AudioSource audio_source;
+    public AudioController audioController;
 
     private float forward_delta = 0.0f;
     private float horizontal_delta = 0.0f;
@@ -27,22 +23,19 @@ public class InputSystem : MonoBehaviour
 
     private bool up, left, down, right;
 
-    private float prev_time = 0.0f;
-    private float current_time = 0.0f;
+    private float prevTime = 0.0f;
+    private float currentTime = 0.0f;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        audio_source = GetComponent<AudioSource>();
-    }
+    void Start() {}
 
     // Update is called once per frame
     void Update()
     {
-        current_time = audio_source.time;
-        if (current_time < prev_time)
+        currentTime = audioController.CurrentTime();
+        if (currentTime < prevTime)
         { // song restarted
-            prev_time = 0f;
+            prevTime = 0f;
         }
 
         bool isValid = InsideInputWindow();
@@ -58,7 +51,7 @@ public class InputSystem : MonoBehaviour
 
         if (TimeSinceLastUpdate() > GetSecondsPerBeat())
         {
-            prev_time += GetSecondsPerBeat();
+            prevTime += GetSecondsPerBeat();
             UpdateDeltas();
             ClearInputs();
         }
@@ -66,12 +59,12 @@ public class InputSystem : MonoBehaviour
 
     public float GetSecondsPerBeat()
     {
-        return 1.0f / (bpm / 60.0f);
+        return audioController.GetSecondsPerBeat();
     }
 
     public float TimeSinceLastUpdate()
     {
-        return (current_time + beat_offset * GetSecondsPerBeat()) - prev_time;
+        return (currentTime + audioController.beatOffset * GetSecondsPerBeat()) - prevTime;
     }
 
     public float GetProgress()
@@ -79,9 +72,14 @@ public class InputSystem : MonoBehaviour
         return TimeSinceLastUpdate() / GetSecondsPerBeat();
     }
 
+    public float GetWindowSize()
+    {
+        return audioController.windowSize;
+    }
+
     bool InsideInputWindow()
     {
-        return TimeSinceLastUpdate() > GetSecondsPerBeat() - window_size && TimeSinceLastUpdate() <= GetSecondsPerBeat();
+        return TimeSinceLastUpdate() > GetSecondsPerBeat() - GetWindowSize() && TimeSinceLastUpdate() <= GetSecondsPerBeat();
     }
 
     void UpdateIgnoredInputs()
