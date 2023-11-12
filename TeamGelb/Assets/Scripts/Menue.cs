@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Gianni.Helper;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Menue : MonoBehaviour
 {
@@ -10,11 +11,14 @@ public class Menue : MonoBehaviour
     public float dollySpeed;
     public CinemachineVirtualCamera LevelCam;
     private CinemachineTrackedDolly dolly;
+    public GameObject GoalText;
+    public GameObject MainUI;
     // Start is called before the first frame update
     void Start()
     {
         CinemachineBrain.SoloCamera = LevelCam; // to set it
         dolly = LevelCam.GetCinemachineComponent<CinemachineTrackedDolly>();
+        GoalText.SetActive(false);
         
     }
 
@@ -26,7 +30,17 @@ public class Menue : MonoBehaviour
     public void ButtonEventStart()
     {
         Player.SetActive(true);
-        gameObject.SetActive(false);
+        MainUI.SetActive(false);
         CinemachineBrain.SoloCamera = null; // to clear it
+    }
+    public void Goal()
+    {
+        GoalText.SetActive(true);
+        LevelCam.LookAt = Player.transform;
+        CinemachineBrain.SoloCamera = LevelCam;
+    }
+    public void Restart()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 }
