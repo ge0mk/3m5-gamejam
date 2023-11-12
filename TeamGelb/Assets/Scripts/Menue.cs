@@ -40,7 +40,10 @@ public class Menue : MonoBehaviour
         GoalText.gameObject.SetActive(true);
         LevelCam.LookAt = player;
         GoalText.text += " " + player.name;
+        Player1.SetActive(false);
+        Player2.SetActive(false);
         CinemachineBrain.SoloCamera = LevelCam;
+        
     }
     public void Restart()
     {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4130121377963387949}
   - component: {fileID: 6067759055305123154}
   - component: {fileID: 5972432400947849621}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: GoalRat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2894069207914694584}
   - component: {fileID: 637941967593665096}
   - component: {fileID: 8594328874479450351}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: GoalCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
