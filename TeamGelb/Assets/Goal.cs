@@ -17,7 +17,7 @@ public class Goal : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            menue.Goal();
+            menue.Goal(other.transform);
             this.InvokeWaitLoop(0.001f, Spawn.SpownObject);
             this.InvokeWaitLoop(0.001f, Spawn.SpownObject);
             this.InvokeWaitLoop(0.001f, Spawn.SpownObject);
