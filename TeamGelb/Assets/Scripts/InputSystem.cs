@@ -15,12 +15,17 @@ public class InputSystem : MonoBehaviour
     private float forward_delta = 0.0f;
     private float horizontal_delta = 0.0f;
 
-    private bool ignore_w = false;
-    private bool ignore_a = false;
-    private bool ignore_s = false;
-    private bool ignore_d = false;
+    public KeyCode UpInput;
+    public KeyCode DownInput;
+    public KeyCode LeftInput;
+    public KeyCode RightInput;
 
-    private bool w, a, s, d;
+    private bool ignore_up = false;
+    private bool ignore_left = false;
+    private bool ignore_down = false;
+    private bool ignore_right = false;
+
+    private bool up, left, down, right;
 
     private float prev_time = 0.0f;
     private float current_time = 0.0f;
@@ -81,26 +86,26 @@ public class InputSystem : MonoBehaviour
 
     void UpdateIgnoredInputs()
     {
-        ignore_w = Input.GetKey("w");
-        ignore_a = Input.GetKey("a");
-        ignore_s = Input.GetKey("s");
-        ignore_d = Input.GetKey("d");
+        ignore_up = Input.GetKey(UpInput);
+        ignore_left = Input.GetKey(LeftInput);
+        ignore_down = Input.GetKey(DownInput);
+        ignore_right = Input.GetKey(RightInput);
     }
 
     void UpdateInputs()
     {
-        w |= Input.GetKey("w") && !ignore_w;
-        a |= Input.GetKey("a") && !ignore_a;
-        s |= Input.GetKey("s") && !ignore_s;
-        d |= Input.GetKey("d") && !ignore_d;
+        up |= Input.GetKey(UpInput) && !ignore_up;
+        left |= Input.GetKey(LeftInput) && !ignore_left;
+        down |= Input.GetKey(DownInput) && !ignore_down;
+        right |= Input.GetKey(RightInput) && !ignore_right;
     }
 
     void UpdateDeltas()
     {
-        float accelerate = w ? 1.0f : 0.0f;
-        float left = a ? 1.0f : 0.0f;
-        float brake = s ? 1.0f : 0.0f;
-        float right = d ? 1.0f : 0.0f;
+        float accelerate = up ? 1.0f : 0.0f;
+        float left = this.left ? 1.0f : 0.0f;
+        float brake = down ? 1.0f : 0.0f;
+        float right = this.right ? 1.0f : 0.0f;
 
         forward_delta = accelerate - brake;
         horizontal_delta = right - left;
@@ -108,15 +113,15 @@ public class InputSystem : MonoBehaviour
 
     void ClearInputs()
     {
-        ignore_w = false;
-        ignore_a = false;
-        ignore_s = false;
-        ignore_d = false;
+        ignore_up = false;
+        ignore_left = false;
+        ignore_down = false;
+        ignore_right = false;
 
-        w = false;
-        a = false;
-        s = false;
-        d = false;
+        up = false;
+        left = false;
+        down = false;
+        right = false;
     }
 
     public float GetForwardDelta()
