@@ -43,8 +43,6 @@ public class GameUI : MonoBehaviour
 
         float progress = (input_system.GetProgress() + 0.5f + input_system.window_size / 2.0f + cursor_offset) % 1.0f;
         GUI.Box(new Rect(Screen.width * progress - 5, 0, 5, 50), "", currentStyle);
-
-        GUI.Button(new Rect(10, 10, 70, 30), "Menu");
     }
 
     private void InitStyles()
