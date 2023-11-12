@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     public float StepSpeed;
     
     private Vector3 forceDirection;
-    float Angel;
+    public float Angel;
     private Rigidbody rb;
     void Start()
     {
@@ -22,7 +22,11 @@ public class PlayerControl : MonoBehaviour
         Angel = transform.eulerAngles.y;
         forceDirection = transform.forward;
     }
-
+    public void ResetAngel(float YAxe)
+    {
+        Angel = YAxe;
+        forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * Angel), 0f, Mathf.Cos(Mathf.Deg2Rad * Angel));
+    }
     // Update is called once per frame
     void FixedUpdate()
     {

@@ -29,6 +29,7 @@ public class CheckpointManager : MonoBehaviour
     {
         Transform lastCheckpointPosition = visitedCheckpoints.Last().GetComponent<Transform>();
         var rb = player.GetComponent<Rigidbody>();
+        this.player.ResetAngel(lastCheckpointPosition.transform.eulerAngles.y);
         rb.velocity = lastCheckpointPosition.transform.forward * player.Speed;
         rb.position= lastCheckpointPosition.transform.position;
         rb.rotation = lastCheckpointPosition.transform.rotation;
