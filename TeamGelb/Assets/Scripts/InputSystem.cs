@@ -6,6 +6,7 @@ public class InputSystem : MonoBehaviour
 {
     public float bpm = 40.0f;
     public float window_size = 0.5f;
+    public float beat_offset = 0.0f;
 
     public bool isValid { get; set; }
 
@@ -65,7 +66,7 @@ public class InputSystem : MonoBehaviour
 
     public float TimeSinceLastUpdate()
     {
-        return current_time - prev_time;
+        return (current_time + beat_offset * GetSecondsPerBeat()) - prev_time;
     }
 
     public float GetProgress()
