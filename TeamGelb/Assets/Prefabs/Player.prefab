@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7706220951760239380}
   - component: {fileID: 8703679613806042878}
   - component: {fileID: 8119034449209582173}
-  - component: {fileID: 2108831914455039500}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -95,8 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49018e8e954951fab84f00c8e2a13ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 40
-  window_size: 0.5
+  bpm: 83.35
+  window_size: 0.15
+  beat_offset: 0.5
 --- !u!114 &7706220951760239380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d324e552cd018d09834261cc8f81aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor_offset: 0.1
 --- !u!114 &8703679613806042878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,11 +135,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: ac70f33cdd7fdb8d480f9ce35d6772dd,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: e9eb0405a7340979db7b3e4dd1145ec3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: db66bc3bfa9b8f9f7985998ff186686d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -220,18 +221,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2108831914455039500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341528105598264525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d324e552cd018d09834261cc8f81aeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4418699372994324192
 GameObject:
   m_ObjectHideFlags: 0
