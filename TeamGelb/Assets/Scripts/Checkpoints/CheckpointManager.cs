@@ -6,32 +6,48 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
-    public PlayerControl player;
-    private List<Checkpoint> visitedCheckpoints;
+    public List<PlayerControl> players;
+    private Dictionary<PlayerControl, List<Checkpoint>> visitedCheckpointsPerPlayer;
+
     void Awake()
     {
-        visitedCheckpoints = new List<Checkpoint>();
-        gameObject.transform.GetChild(0).GetComponent<Checkpoint>().InformCheckpointManager();
+        visitedCheckpointsPerPlayer = new Dictionary<PlayerControl, List<Checkpoint>>();
+        players.ForEach(player =>
+        {
+            List<Checkpoint> checkpointsList = new List<Checkpoint>();
+            visitedCheckpointsPerPlayer.Add(player, checkpointsList);
+            gameObject.transform.GetChild(0).GetComponent<Checkpoint>().InformCheckpointManager(player);
+        });
     }
 
-    private void Update() {
-        if (player.transform.position.y < -4) {
-            ResetPlayerToLastCheckpoint(player);
-        }
-    }
-
-    public void PlayerThroughCheckpoint(Checkpoint checkpoint)
+    private void Update()
     {
-        visitedCheckpoints.Add(checkpoint);
+        players.ForEach(player =>
+        {
+            if (player.transform.position.y < -4)
+            {
+                ResetPlayerToLastCheckpoint(player);
+            }
+        });
+    }
+
+    public void PlayerThroughCheckpoint(Checkpoint checkpoint, PlayerControl player)
+    {
+        List<Checkpoint> checkpointsList = visitedCheckpointsPerPlayer[player];
+        if (!checkpointsList.Contains(checkpoint))
+        {
+            checkpointsList.Add(checkpoint);
+        }
     }
 
     public void ResetPlayerToLastCheckpoint(PlayerControl player)
     {
-        Transform lastCheckpointPosition = visitedCheckpoints.Last().GetComponent<Transform>();
+        List<Checkpoint> checkpointsList = visitedCheckpointsPerPlayer[player];
+        Transform lastCheckpointPosition = checkpointsList.Last().GetComponent<Transform>();
         var rb = player.GetComponent<Rigidbody>();
-        this.player.ResetAngle(lastCheckpointPosition.transform.eulerAngles.y);
+        player.ResetAngle(lastCheckpointPosition.transform.eulerAngles.y);
         rb.velocity = lastCheckpointPosition.transform.forward * player.GetSpeed();
-        rb.position= lastCheckpointPosition.transform.position;
+        rb.position = lastCheckpointPosition.transform.position;
         rb.rotation = lastCheckpointPosition.transform.rotation;
     }
 }
