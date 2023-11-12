@@ -6,57 +6,69 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerControl : MonoBehaviour
 {
-    public InputSystem input;
-    public float Speed;
-    
-    public float StepAngel;
-    public float StepSpeed;
-    
-    private Vector3 forceDirection;
-    public float Angel;
+    public float startSpeed;
+    public float minSpeed;
+    public float acceleration;
+
+    public float stepAngle;
+
     private Rigidbody rb;
+    private InputSystem input;
+
+    private float speed;
+    private float angle;
+    private Vector3 forceDirection;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         input = GetComponent<InputSystem>();
-        Angel = transform.eulerAngles.y;
+
+        speed = startSpeed;
+        angle = transform.eulerAngles.y;
         forceDirection = transform.forward;
     }
-    public void ResetAngel(float YAxe)
+
+    public void ResetAngle(float newAngle)
     {
-        Angel = YAxe;
-        forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * Angel), 0f, Mathf.Cos(Mathf.Deg2Rad * Angel));
+        angle = newAngle;
+        forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0f, Mathf.Cos(Mathf.Deg2Rad * angle));
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(forceDirection * Speed, ForceMode.Force);
+        rb.AddForce(forceDirection * speed, ForceMode.Force);
         transform.rotation = Quaternion.LookRotation(forceDirection);
         //transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.02f);
     }
+
     private void Update()
     {
         switch (input.GetHorizontalDelta())
         {
             case 1f:
-                Angel += StepAngel;
-                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * Angel), 0f, Mathf.Cos(Mathf.Deg2Rad * Angel));
+                angle += stepAngle;
+                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0f, Mathf.Cos(Mathf.Deg2Rad * angle));
                 break;
             case -1f:
-                Angel -= StepAngel;
-                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * Angel), 0f, Mathf.Cos(Mathf.Deg2Rad * Angel));
+                angle -= stepAngle;
+                forceDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0f, Mathf.Cos(Mathf.Deg2Rad * angle));
                 break;
-        
         }
-        switch (input.GetForwardDelta())
-        {
-            case 1f:
-                Speed += StepSpeed;
-                break;
-            case -1f:
-                Speed -= StepSpeed;
-                break;
-        
+
+        float forwardDelta = input.GetForwardDelta();
+        if (forwardDelta != 0f) {
+            speed += acceleration * forwardDelta;
         }
+
+        if (speed < minSpeed) {
+            speed = minSpeed;
+        }
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
     }
 }

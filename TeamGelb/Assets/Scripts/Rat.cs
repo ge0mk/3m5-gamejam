@@ -24,7 +24,7 @@ public class Rat : MonoBehaviour
         b.SetActive(false);
         c.SetActive(false);
 
-        switch (Random.Range(0, 4)) {
+        switch (Random.Range(0, 3)) {
             case 0: a.SetActive(true); break;
             case 1: b.SetActive(true); break;
             case 2: c.SetActive(true); break;
