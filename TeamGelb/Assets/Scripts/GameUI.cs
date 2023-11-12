@@ -7,6 +7,9 @@ public class GameUI : MonoBehaviour
 {
     public float cursor_offset = 0.0f;
 
+    public float ScreenWidth = 0.5f;
+    public float ScreenPositionOffset = 0.0f;
+
     private static Color wrong_input_color = Color.red;
     private static Color correct_input_color = Color.green;
     private static Color no_input_color = Color.grey;
@@ -30,19 +33,24 @@ public class GameUI : MonoBehaviour
 
     void OnGUI()
     {
-        if (Input.anyKeyDown)
+        bool pressedValidKey =
+            Input.GetKey(input_system.UpInput) ||
+            Input.GetKey(input_system.LeftInput) ||
+            Input.GetKey(input_system.DownInput) ||
+            Input.GetKey(input_system.RightInput);
+        if (pressedValidKey)
         {
             UpdateCurrentStyle(input_system.isValid);
-            this.InvokeWait(0.5f, ResetStyle);
+            this.InvokeWait(0.2f, ResetStyle);
         }
         InitStyles();
 
-        float window_width = Screen.width * input_system.GetWindowSize() / input_system.GetSecondsPerBeat();
-        float window_left_edge = Screen.width / 2.0f - window_width / 2.0f;
+        float window_width = Screen.width * input_system.GetWindowSize() / input_system.GetSecondsPerBeat() * ScreenWidth;
+        float window_left_edge = (Screen.width / 2 - window_width) * (1.0f + ScreenPositionOffset * 5.0f) / 2.0f;
         GUI.Box(new Rect(window_left_edge, 0, window_width, 50), "");
 
         float progress = (input_system.GetProgress() + 0.5f + input_system.GetWindowSize() / 2.0f + cursor_offset) % 1.0f;
-        GUI.Box(new Rect(Screen.width * progress - 5, 0, 5, 50), "", currentStyle);
+        GUI.Box(new Rect(Screen.width * ScreenWidth * progress - 5 + ScreenPositionOffset * 2.0f * Screen.width * ScreenWidth, 0, 5, 50), "", currentStyle);
     }
 
     private void InitStyles()
