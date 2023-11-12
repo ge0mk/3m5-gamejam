@@ -25,7 +25,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5701111041949183405
 Transform:
   m_ObjectHideFlags: 0
@@ -83,11 +83,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a8eda3f1f344919a5c1b7a88134746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 3879782380517068245}
-  Speed: 15
-  StepAngel: 22.5
-  StepSpeed: 5
-  Angel: 0
+  startSpeed: 15
+  minSpeed: 5
+  acceleration: 5
+  stepAngle: 22.5
 --- !u!114 &3879782380517068245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,6 +102,10 @@ MonoBehaviour:
   bpm: 83.35
   window_size: 0.15
   beat_offset: 0.5
+  UpInput: 0
+  DownInput: 0
+  LeftInput: 0
+  RightInput: 0
 --- !u!114 &7706220951760239380
 MonoBehaviour:
   m_ObjectHideFlags: 0
