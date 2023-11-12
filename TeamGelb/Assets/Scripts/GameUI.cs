@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameUI : MonoBehaviour
 {
+    public float cursor_offset = 0.0f;
+
     private static Color wrong_input_color = Color.red;
     private static Color correct_input_color = Color.green;
     private static Color no_input_color = Color.grey;
@@ -39,7 +41,7 @@ public class GameUI : MonoBehaviour
         float window_left_edge = Screen.width / 2.0f - window_width / 2.0f;
         GUI.Box(new Rect(window_left_edge, 0, window_width, 50), "");
 
-        float progress = (input_system.GetProgress() + 0.4f + input_system.window_size / 2.0f) % 1.0f;
+        float progress = (input_system.GetProgress() + 0.5f + input_system.window_size / 2.0f + cursor_offset) % 1.0f;
         GUI.Box(new Rect(Screen.width * progress - 5, 0, 5, 50), "", currentStyle);
 
         GUI.Button(new Rect(10, 10, 70, 30), "Menu");
